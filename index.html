@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ========== ПЕРЕМЕННЫЕ ЦВЕТОВОЙ ПАЛИТРЫ ========== */
+    /* ========== ПЕРЕМЕННЫЕ (ОРИГИНАЛ) ========== */
     :root {
       --cloud-dancer:   #F8F9FA;
       --dusty-rose:     #DCA1A1;
@@ -75,7 +75,6 @@
     @media (min-width: 768px) {
       .browser-dots span { width: 12px; height: 12px; }
     }
-
     .browser-dots span:nth-child(1) { background: #ff5f57; }
     .browser-dots span:nth-child(2) { background: #febc2e; }
     .browser-dots span:nth-child(3) { background: #28c840; }
@@ -106,7 +105,7 @@
       box-shadow: 0 24px 80px rgba(0,0,0,0.55);
     }
 
-    /* ========== HERO SECTION С ФОНОМ ========== */
+    /* ========== HERO С ФОНОМ (без изменения цвета текста) ========== */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -116,22 +115,39 @@
       justify-content: center;
       text-align: center;
       padding: 60px 20px 80px;
-      /* ФОНОВОЕ ИЗОБРАЖЕНИЕ */
-      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero-bg.jpg');
+      overflow: hidden;
+      background: linear-gradient(170deg, var(--cloud-dancer) 0%, #f0ebe4 45%, #e8ddd3 100%);
+    }
+    /* Фоновое изображение через псевдоэлемент (не трогает текст) */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('hero-bg.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      overflow: hidden;
+      opacity: 0.65; /* полупрозрачное фото, чтобы текст оставался читаемым */
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* Все внутренние элементы hero получают z-index, чтобы быть выше фона */
+    .hero > * {
+      position: relative;
+      z-index: 2;
     }
     @media (min-width: 768px) {
       .hero { padding: 80px 40px 100px; }
     }
 
-    /* Ботанические иллюстрации (оставляем, но они будут поверх фото, можно скрыть при желании, но оставим как есть) */
+    /* Ботанические иллюстрации (полные) */
     .botanical {
       position: absolute;
       pointer-events: none;
-      opacity: 0.4;
+      z-index: 1;
     }
     .botanical--tl { top: -20px; left: -30px; width: 200px; transform: rotate(-10deg); }
     .botanical--tr { top: -10px; right: -20px; width: 180px; transform: rotate(12deg) scaleX(-1); }
@@ -153,14 +169,24 @@
     @media (min-width: 768px) {
       .hero-ornament { width: 80px; margin-bottom: 28px; }
     }
+    .hero-ornament::before,
+    .hero-ornament::after {
+      content: '';
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--dusty-rose);
+    }
+    .hero-ornament::before { left: -8px; }
+    .hero-ornament::after  { right: -8px; }
 
     .hero-pre {
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #fff; /* стал белым, чтобы читалось на тёмном фоне */
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      color: var(--soft-clay);
       margin-bottom: 14px;
     }
     @media (min-width: 768px) {
@@ -172,8 +198,7 @@
       font-size: clamp(40px, 12vw, 110px);
       font-weight: 300;
       letter-spacing: 3px;
-      color: #fff;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      color: var(--graphite);
       line-height: 1;
       margin-bottom: 8px;
     }
@@ -189,7 +214,7 @@
       width: 80%;
       max-width: 320px;
       height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.8) 70%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, var(--graphite) 30%, var(--graphite) 70%, transparent 100%);
       margin: 12px auto 20px;
     }
     @media (min-width: 768px) {
@@ -201,8 +226,7 @@
       font-size: clamp(14px, 4vw, 26px);
       font-weight: 400;
       letter-spacing: 4px;
-      color: #fff;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      color: var(--caramel-mousse);
       text-transform: uppercase;
       margin-bottom: 6px;
     }
@@ -214,8 +238,7 @@
       font-size: 10px;
       font-weight: 400;
       letter-spacing: 2px;
-      color: #fff;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      color: var(--soft-clay);
       text-transform: uppercase;
       margin-bottom: 32px;
     }
@@ -223,7 +246,6 @@
       .hero-place { font-size: 12px; letter-spacing: 3px; margin-bottom: 48px; }
     }
 
-    /* Таймер на тёмном фоне */
     .countdown {
       display: flex;
       gap: 12px;
@@ -247,8 +269,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 32px;
       font-weight: 300;
-      color: #fff;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      color: var(--burnt-caramel);
       line-height: 1;
       min-width: 44px;
       text-align: center;
@@ -263,8 +284,7 @@
       font-size: 8px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: #fff;
-      opacity: 0.9;
+      color: var(--soft-clay);
     }
     @media (min-width: 480px) {
       .countdown-label { font-size: 9px; letter-spacing: 2.5px; }
@@ -273,7 +293,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 28px;
       font-weight: 300;
-      color: #fff;
+      color: var(--dusty-rose);
       align-self: flex-start;
       padding-top: 4px;
       display: none;
@@ -287,8 +307,8 @@
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      color: #fff;
-      opacity: 0.8;
+      color: var(--graphite);
+      opacity: 0.45;
       font-size: 9px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -298,18 +318,18 @@
     }
     .hero-scroll-line {
       width: 1px; height: 30px;
-      background: #fff;
+      background: var(--graphite);
       animation: scrollPulse 2s ease-in-out infinite;
     }
     @media (min-width: 768px) {
       .hero-scroll-line { height: 40px; }
     }
     @keyframes scrollPulse {
-      0%, 100% { opacity: 0.6; transform: scaleY(1); }
-      50%       { opacity: 0.2; transform: scaleY(0.6); }
+      0%, 100% { opacity: 0.45; transform: scaleY(1); }
+      50%       { opacity: 0.15; transform: scaleY(0.6); }
     }
 
-    /* ========== ОСТАЛЬНЫЕ СТИЛИ (без изменений, только адаптив) ========== */
+    /* ========== ОСТАЛЬНЫЕ СЕКЦИИ (ПОЛНОСТЬЮ ОРИГИНАЛ) ========== */
     .section {
       padding: 50px 20px;
       position: relative;
@@ -776,13 +796,39 @@
         </ul>
       </nav>
 
-      <!-- HERO С ФОНОМ -->
+      <!-- HERO С ФОТО (без изменения стилей текста) -->
       <section class="hero">
-        <!-- Ботанические иллюстрации (оставлены как есть) -->
-        <svg class="botanical botanical--tl" viewBox="0 0 340 420" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>
-        <svg class="botanical botanical--tr" viewBox="0 0 340 420" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>
-        <svg class="botanical botanical--bl" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>
-        <svg class="botanical botanical--br" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>
+        <!-- Ботанические иллюстрации (полные SVG) -->
+        <svg class="botanical botanical--tl" viewBox="0 0 340 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M170 10 L170 410" stroke="#5E6B4B" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M170 80 C130 60 80 80 60 120" stroke="#5E6B4B" stroke-width="1" fill="none"/>
+          <path d="M170 80 C210 60 260 80 280 120" stroke="#5E6B4B" stroke-width="1" fill="none"/>
+          <path d="M170 150 C120 140 70 170 50 220" stroke="#5E6B4B" stroke-width="1" fill="none"/>
+          <path d="M170 150 C220 140 270 170 290 220" stroke="#5E6B4B" stroke-width="1" fill="none"/>
+          <ellipse cx="170" cy="80" rx="12" ry="8" fill="#DCA1A1"/>
+          <ellipse cx="60" cy="120" rx="10" ry="6" fill="#D49B6A"/>
+          <ellipse cx="280" cy="120" rx="10" ry="6" fill="#D49B6A"/>
+        </svg>
+        <svg class="botanical botanical--tr" viewBox="0 0 340 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M170 10 L170 410" stroke="#5E6B4B" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M170 80 C130 60 80 80 60 120" stroke="#5E6B4B" stroke-width="1" fill="none"/>
+          <path d="M170 80 C210 60 260 80 280 120" stroke="#5E6B4B" stroke-width="1" fill="none"/>
+          <ellipse cx="170" cy="80" rx="12" ry="8" fill="#DCA1A1"/>
+          <ellipse cx="60" cy="120" rx="10" ry="6" fill="#D49B6A"/>
+          <ellipse cx="280" cy="120" rx="10" ry="6" fill="#D49B6A"/>
+        </svg>
+        <svg class="botanical botanical--bl" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M110 20 L110 180" stroke="#5E6B4B" stroke-width="1" stroke-linecap="round"/>
+          <path d="M110 60 C80 45 50 60 40 90" stroke="#5E6B4B" stroke-width="0.8" fill="none"/>
+          <path d="M110 60 C140 45 170 60 180 90" stroke="#5E6B4B" stroke-width="0.8" fill="none"/>
+          <ellipse cx="110" cy="60" rx="8" ry="5" fill="#DCA1A1"/>
+        </svg>
+        <svg class="botanical botanical--br" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M110 20 L110 180" stroke="#5E6B4B" stroke-width="1" stroke-linecap="round"/>
+          <path d="M110 60 C80 45 50 60 40 90" stroke="#5E6B4B" stroke-width="0.8" fill="none"/>
+          <path d="M110 60 C140 45 170 60 180 90" stroke="#5E6B4B" stroke-width="0.8" fill="none"/>
+          <ellipse cx="110" cy="60" rx="8" ry="5" fill="#DCA1A1"/>
+        </svg>
 
         <div style="position: relative; z-index: 2;">
           <p class="hero-pre">Приглашаем вас разделить с нами радость создания новой семьи</p>
@@ -1106,7 +1152,7 @@
       const diff = target - now;
       if (diff <= 0) {
         const container = document.getElementById('countdown');
-        if (container) container.innerHTML = '<span style="font-family:Cormorant Garamond,serif;font-size:clamp(24px,6vw,32px);color:#fff;letter-spacing:3px;">Сегодня!</span>';
+        if (container) container.innerHTML = '<span style="font-family:Cormorant Garamond,serif;font-size:clamp(24px,6vw,32px);color:var(--burnt-caramel);letter-spacing:3px;">Сегодня!</span>';
         return;
       }
       const days    = Math.floor(diff / 86400000);
