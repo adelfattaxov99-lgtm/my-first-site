@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* ========== ПЕРЕМЕННЫЕ ========== */
+    /* ========== ПЕРЕМЕННЫЕ (оригинал) ========== */
     :root {
       --cloud-dancer:   #F8F9FA;
       --dusty-rose:     #DCA1A1;
@@ -321,7 +321,7 @@
       50%       { opacity: 0.15; transform: scaleY(0.6); }
     }
 
-    /* ========== ОСТАЛЬНЫЕ СЕКЦИИ ========== */
+    /* ========== ОСТАЛЬНЫЕ СЕКЦИИ (полностью оригинал, светлый фон карты) ========== */
     .section {
       padding: 50px 20px;
       position: relative;
@@ -479,7 +479,7 @@
       .program-desc { font-size: 12px; }
     }
 
-    /* ========== МЕСТО ПРОВЕДЕНИЯ (светлая карта) ========== */
+    /* ========== МЕСТО ПРОВЕДЕНИЯ (светлая карта, светлый фон как в первом варианте) ========== */
     .venue-layout {
       display: flex;
       flex-direction: column;
@@ -501,7 +501,7 @@
       border: 1px solid rgba(69,73,78,0.12);
       box-shadow: var(--shadow-card);
       aspect-ratio: 4/3;
-      background: #eae4dc;
+      background: #eae4dc;  /* светлый фон */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -511,7 +511,7 @@
       width: 100%;
       height: auto;
       display: block;
-      background: #ede7de;
+      background: #ede7de; /* светлый фон для SVG */
     }
     .venue-name {
       font-family: 'Cormorant Garamond', serif;
@@ -616,7 +616,7 @@
       display: block;
     }
 
-    /* ========== RSVP ========== */
+    /* ========== RSVP (убрана строка "до 1 мая") ========== */
     .rsvp-section {
       background: linear-gradient(135deg, var(--cloud-dancer) 0%, #efe9e2 100%);
     }
@@ -767,9 +767,7 @@
 <body>
 <div class="browser-wrapper">
   <div class="browser-chrome">
-    <div class="browser-dots">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="browser-dots"><span></span><span></span><span></span></div>
     <div class="browser-addressbar">
       <svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="1" y="5.5" width="9" height="7" rx="1.5" stroke="#28c840" stroke-width="1.2" fill="none"/>
@@ -791,6 +789,7 @@
         </ul>
       </nav>
 
+      <!-- HERO С ФОТО -->
       <section class="hero">
         <svg class="botanical botanical--tl" viewBox="0 0 340 420" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M170 10 L170 410" stroke="#5E6B4B" stroke-width="1.2" stroke-linecap="round"/>
@@ -842,6 +841,7 @@
         </div>
       </section>
 
+      <!-- ПРОГРАММА -->
       <section class="section section--alt" id="program">
         <div class="section-header">
           <p class="section-eyebrow">День свадьбы</p>
@@ -873,6 +873,7 @@
         </div>
       </section>
 
+      <!-- МЕСТО ПРОВЕДЕНИЯ (светлая карта) -->
       <section class="section" id="venue">
         <div class="section-header">
           <p class="section-eyebrow">Где нас найти</p>
@@ -918,6 +919,7 @@
         </div>
       </section>
 
+      <!-- ГАЛЕРЕЯ -->
       <section class="section gallery-section" id="gallery">
         <div class="section-header"><h2 class="section-title">мы выросли и теперь нам можно</h2><div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-diamond"></div><div class="section-divider-line"></div></div></div>
         <div class="gallery-grid-new">
@@ -927,11 +929,12 @@
         </div>
       </section>
 
+      <!-- RSVP (фраза "до 1 мая 2026" удалена) -->
       <section class="section rsvp-section" id="rsvp">
         <div class="section-header"><p class="section-eyebrow">Мы будем рады видеть вас</p><h2 class="section-title">Подтвердить присутствие</h2><div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-diamond"></div><div class="section-divider-line"></div></div></div>
         <div class="rsvp-card card">
           <div style="position:absolute; top:-20px; right:-10px; opacity:0.3; pointer-events:none;"><svg width="80" height="70" viewBox="0 0 120 100" fill="none"><path d="M10 90 C30 65 55 50 80 30 C100 15 110 8 115 3" stroke="#5E6B4B" stroke-width="1.2" stroke-linecap="round"/><ellipse cx="55" cy="55" rx="14" ry="7" transform="rotate(-40 55 55)" fill="#5E6B4B"/><ellipse cx="75" cy="38" rx="12" ry="6" transform="rotate(-30 75 38)" fill="#5E6B4B"/></svg></div>
-          <p class="rsvp-note">Пожалуйста, подтвердите своё присутствие<br/>до <strong style="color: var(--burnt-caramel);">1 мая 2026 года</strong>.<br/>Нам важно знать, что вы будете рядом.</p>
+          <p class="rsvp-note">Пожалуйста, подтвердите своё присутствие.<br/>Нам важно знать, что вы будете рядом.</p>
           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfi2DPwDblPcvLO7zjmyc1aJNTchDeYiWumSVTGbRPUUi4yAA/viewform?embedded=true" width="100%" frameborder="0" marginheight="0" marginwidth="0" title="RSVP Form">Загрузка…</iframe>
         </div>
       </section>
