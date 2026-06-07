@@ -99,7 +99,7 @@
       box-shadow: 0 24px 80px rgba(0,0,0,0.55);
     }
 
-    /* ========== HERO С ФОТО ========== */
+    /* ========== HERO С ФОТО (без анимации, всегда видна) ========== */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -135,6 +135,22 @@
       .hero { padding: 80px 40px 100px; }
     }
 
+    /* ========== АНИМАЦИЯ ПРИ СКРОЛЛЕ ========== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.4, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.4, 1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Более лёгкая задержка для дочерних элементов внутри секций (опционально) */
+    .program-item, .venue-map, .venue-info, .gallery-item, .rsvp-card {
+      transition-delay: 0.1s;
+    }
+
+    /* ========== ОСТАЛЬНЫЕ СТИЛИ (без изменений, только добавлен светлый фон для #venue) ========== */
     .botanical {
       position: absolute;
       pointer-events: none;
@@ -334,9 +350,9 @@
     }
     .section--alt { background: linear-gradient(135deg, #f5f0ea 0%, var(--cloud-dancer) 100%); }
 
-    /* ЯВНЫЙ СВЕТЛЫЙ ФОН ДЛЯ СЕКЦИИ "МЕСТО ПРОВЕДЕНИЯ" */
+    /* Светлый фон для секции "Место проведения" */
     .section#venue {
-      background: var(--cloud-dancer); /* #F8F9FA */
+      background: var(--cloud-dancer);
     }
 
     .section-header {
@@ -793,7 +809,7 @@
         </ul>
       </nav>
 
-      <!-- HERO С ФОТО -->
+      <!-- HERO (без анимации) -->
       <section class="hero">
         <svg class="botanical botanical--tl" viewBox="0 0 340 420" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M170 10 L170 410" stroke="#5E6B4B" stroke-width="1.2" stroke-linecap="round"/>
@@ -845,8 +861,8 @@
         </div>
       </section>
 
-      <!-- ПРОГРАММА -->
-      <section class="section section--alt" id="program">
+      <!-- ПРОГРАММА (с анимацией) -->
+      <section class="section section--alt fade-up" id="program">
         <div class="section-header">
           <p class="section-eyebrow">День свадьбы</p>
           <h2 class="section-title">Программа</h2>
@@ -877,8 +893,8 @@
         </div>
       </section>
 
-      <!-- МЕСТО ПРОВЕДЕНИЯ (фон секции светлый) -->
-      <section class="section" id="venue">
+      <!-- МЕСТО ПРОВЕДЕНИЯ (с анимацией) -->
+      <section class="section fade-up" id="venue">
         <div class="section-header">
           <p class="section-eyebrow">Где нас найти</p>
           <h2 class="section-title">Место проведения</h2>
@@ -923,8 +939,8 @@
         </div>
       </section>
 
-      <!-- ГАЛЕРЕЯ -->
-      <section class="section gallery-section" id="gallery">
+      <!-- ГАЛЕРЕЯ (с анимацией) -->
+      <section class="section gallery-section fade-up" id="gallery">
         <div class="section-header"><h2 class="section-title">мы выросли и теперь нам можно</h2><div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-diamond"></div><div class="section-divider-line"></div></div></div>
         <div class="gallery-grid-new">
           <div class="gallery-item"><div class="gallery-image-container"><img src="https://i.ibb.co/ZRT4TZ72/V92-YKu0-RNtj5-U3-M0-K6-T5tc-Fuh7-X6-X3-YZJPMy9ow-F8ll6zs-ETo1l7-W96vir-Hp-XAP9jo-ANLi-Uhoej-O3t-ZEZCz-J7-Jk.jpg" alt="Детское фото 1" class="gallery-image"></div></div>
@@ -933,8 +949,8 @@
         </div>
       </section>
 
-      <!-- RSVP -->
-      <section class="section rsvp-section" id="rsvp">
+      <!-- RSVP (с анимацией) -->
+      <section class="section rsvp-section fade-up" id="rsvp">
         <div class="section-header"><p class="section-eyebrow">Мы будем рады видеть вас</p><h2 class="section-title">Подтвердить присутствие</h2><div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-diamond"></div><div class="section-divider-line"></div></div></div>
         <div class="rsvp-card card">
           <div style="position:absolute; top:-20px; right:-10px; opacity:0.3; pointer-events:none;"><svg width="80" height="70" viewBox="0 0 120 100" fill="none"><path d="M10 90 C30 65 55 50 80 30 C100 15 110 8 115 3" stroke="#5E6B4B" stroke-width="1.2" stroke-linecap="round"/><ellipse cx="55" cy="55" rx="14" ry="7" transform="rotate(-40 55 55)" fill="#5E6B4B"/><ellipse cx="75" cy="38" rx="12" ry="6" transform="rotate(-30 75 38)" fill="#5E6B4B"/></svg></div>
@@ -953,7 +969,36 @@
     </div>
   </div>
 </div>
+
 <script>
+  // Анимация появления при скролле
+  (function() {
+    const fadeElements = document.querySelectorAll('.fade-up');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Можно продолжить наблюдение, но после появления класс уже не уберётся
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+    
+    fadeElements.forEach(el => observer.observe(el));
+    
+    // Если какие-то элементы уже видимы при загрузке (например, если секция вверху), 
+    // они получат класс сразу после короткой задержки
+    setTimeout(() => {
+      fadeElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add('visible');
+        }
+      });
+    }, 200);
+  })();
+
+  // Таймер
   (function() {
     const target = new Date('2026-06-18T15:05:00');
     function pad(n) { return String(n).padStart(2, '0'); }
