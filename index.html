@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -11,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ========== ПЕРЕМЕННЫЕ (ОРИГИНАЛ) ========== */
+    /* ========== ПЕРЕМЕННЫЕ ========== */
     :root {
       --cloud-dancer:   #F8F9FA;
       --dusty-rose:     #DCA1A1;
@@ -105,7 +106,7 @@
       box-shadow: 0 24px 80px rgba(0,0,0,0.55);
     }
 
-    /* ========== HERO С ФОНОМ (без изменения цвета текста) ========== */
+    /* ========== HERO С ФОНОМ (фото из репозитория) ========== */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -118,7 +119,6 @@
       overflow: hidden;
       background: linear-gradient(170deg, var(--cloud-dancer) 0%, #f0ebe4 45%, #e8ddd3 100%);
     }
-    /* Фоновое изображение через псевдоэлемент (не трогает текст) */
     .hero::before {
       content: '';
       position: absolute;
@@ -130,11 +130,10 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      opacity: 0.65; /* полупрозрачное фото, чтобы текст оставался читаемым */
+      opacity: 0.65;
       z-index: 0;
       pointer-events: none;
     }
-    /* Все внутренние элементы hero получают z-index, чтобы быть выше фона */
     .hero > * {
       position: relative;
       z-index: 2;
@@ -143,7 +142,7 @@
       .hero { padding: 80px 40px 100px; }
     }
 
-    /* Ботанические иллюстрации (полные) */
+    /* Ботанические иллюстрации */
     .botanical {
       position: absolute;
       pointer-events: none;
@@ -329,7 +328,7 @@
       50%       { opacity: 0.15; transform: scaleY(0.6); }
     }
 
-    /* ========== ОСТАЛЬНЫЕ СЕКЦИИ (ПОЛНОСТЬЮ ОРИГИНАЛ) ========== */
+    /* ========== ОБЩИЕ СТИЛИ СЕКЦИЙ ========== */
     .section {
       padding: 50px 20px;
       position: relative;
@@ -398,6 +397,7 @@
       .section-divider-diamond { width: 6px; height: 6px; }
     }
 
+    /* Карточки */
     .card {
       background: var(--card-bg);
       border: 1px solid rgba(69, 73, 78, 0.13);
@@ -410,6 +410,7 @@
       .card { padding: 36px 32px; }
     }
 
+    /* ========== ПРОГРАММА ========== */
     .program-timeline {
       display: flex;
       flex-direction: column;
@@ -487,6 +488,7 @@
       .program-desc { font-size: 12px; }
     }
 
+    /* ========== МЕСТО ПРОВЕДЕНИЯ (исправлено, фон светлый) ========== */
     .venue-layout {
       display: flex;
       flex-direction: column;
@@ -518,6 +520,7 @@
       width: 100%;
       height: auto;
       display: block;
+      background: #ede7de;
     }
     .venue-name {
       font-family: 'Cormorant Garamond', serif;
@@ -570,6 +573,7 @@
       margin-bottom: 2px;
     }
 
+    /* ========== ГАЛЕРЕЯ ========== */
     .gallery-section {
       background: linear-gradient(150deg, #f3ede6 0%, #ede5db 50%, #e6ddd3 100%);
     }
@@ -621,6 +625,7 @@
       display: block;
     }
 
+    /* ========== RSVP ========== */
     .rsvp-section {
       background: linear-gradient(135deg, var(--cloud-dancer) 0%, #efe9e2 100%);
     }
@@ -663,6 +668,7 @@
       .rsvp-card iframe { height: 1037px; }
     }
 
+    /* ========== ФУТЕР ========== */
     .footer {
       background: var(--graphite);
       color: rgba(248,249,250,0.55);
@@ -710,6 +716,7 @@
       .footer-copy { font-size: 10px; letter-spacing: 1.5px; }
     }
 
+    /* ========== НАВИГАЦИЯ ========== */
     .nav {
       position: sticky;
       top: 0; z-index: 100;
@@ -796,9 +803,9 @@
         </ul>
       </nav>
 
-      <!-- HERO С ФОТО (без изменения стилей текста) -->
+      <!-- HERO С ФОТО -->
       <section class="hero">
-        <!-- Ботанические иллюстрации (полные SVG) -->
+        <!-- ботанические иллюстрации -->
         <svg class="botanical botanical--tl" viewBox="0 0 340 420" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M170 10 L170 410" stroke="#5E6B4B" stroke-width="1.2" stroke-linecap="round"/>
           <path d="M170 80 C130 60 80 80 60 120" stroke="#5E6B4B" stroke-width="1" fill="none"/>
@@ -1061,23 +1068,17 @@
         <div class="gallery-grid-new">
           <div class="gallery-item">
             <div class="gallery-image-container">
-              <img src="https://i.ibb.co/ZRT4TZ72/V92-YKu0-RNtj5-U3-M0-K6-T5tc-Fuh7-X6-X3-YZJPMy9ow-F8ll6zs-ETo1l7-W96vir-Hp-XAP9jo-ANLi-Uhoej-O3t-ZEZCz-J7-Jk.jpg" 
-                   alt="Детское фото 1" 
-                   class="gallery-image">
+              <img src="https://i.ibb.co/ZRT4TZ72/V92-YKu0-RNtj5-U3-M0-K6-T5tc-Fuh7-X6-X3-YZJPMy9ow-F8ll6zs-ETo1l7-W96vir-Hp-XAP9jo-ANLi-Uhoej-O3t-ZEZCz-J7-Jk.jpg" alt="Детское фото 1" class="gallery-image">
             </div>
           </div>
           <div class="gallery-item">
             <div class="gallery-image-container">
-              <img src="https://i.ibb.co/qYP89ZFp/YOlv-K0o-M0-MC-ZAUmwg1-YUge-Yv-KRUm-D-st-Bi-JZ3-Hwr-Ju-Nf4f-Kl-H5-Pu2bhzsr-OEAMZx-G4-Dxdv9-DHGh-GJHe-RFcj.jpg" 
-                   alt="Новое фото" 
-                   class="gallery-image">
+              <img src="https://i.ibb.co/qYP89ZFp/YOlv-K0o-M0-MC-ZAUmwg1-YUge-Yv-KRUm-D-st-Bi-JZ3-Hwr-Ju-Nf4f-Kl-H5-Pu2bhzsr-OEAMZx-G4-Dxdv9-DHGh-GJHe-RFcj.jpg" alt="Новое фото" class="gallery-image">
             </div>
           </div>
           <div class="gallery-item">
             <div class="gallery-image-container">
-              <img src="https://i.ibb.co/wZtFTjDY/z3-Sb-TL7-No-U4mx-W5-RW50irn-CYQi-A5sfxdhr-CQ-gn-WIHm-gs-FJn-IUXJqg-PAp-KLohj-P5vaiz5nslh3u-Hh-V4zqa991.jpg" 
-                   alt="Детское фото 2" 
-                   class="gallery-image">
+              <img src="https://i.ibb.co/wZtFTjDY/z3-Sb-TL7-No-U4mx-W5-RW50irn-CYQi-A5sfxdhr-CQ-gn-WIHm-gs-FJn-IUXJqg-PAp-KLohj-P5vaiz5nslh3u-Hh-V4zqa991.jpg" alt="Детское фото 2" class="gallery-image">
             </div>
           </div>
         </div>
@@ -1159,14 +1160,10 @@
       const hours   = Math.floor((diff % 86400000) / 3600000);
       const minutes = Math.floor((diff % 3600000)  / 60000);
       const seconds = Math.floor((diff % 60000)    / 1000);
-      const daysEl = document.getElementById('days');
-      const hoursEl = document.getElementById('hours');
-      const minutesEl = document.getElementById('minutes');
-      const secondsEl = document.getElementById('seconds');
-      if (daysEl) daysEl.textContent = pad(days);
-      if (hoursEl) hoursEl.textContent = pad(hours);
-      if (minutesEl) minutesEl.textContent = pad(minutes);
-      if (secondsEl) secondsEl.textContent = pad(seconds);
+      if (document.getElementById('days')) document.getElementById('days').textContent = pad(days);
+      if (document.getElementById('hours')) document.getElementById('hours').textContent = pad(hours);
+      if (document.getElementById('minutes')) document.getElementById('minutes').textContent = pad(minutes);
+      if (document.getElementById('seconds')) document.getElementById('seconds').textContent = pad(seconds);
     }
     update();
     setInterval(update, 1000);
