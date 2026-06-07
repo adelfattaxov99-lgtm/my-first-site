@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* ========== ПЕРЕМЕННЫЕ (оригинал) ========== */
+    /* ========== ПЕРЕМЕННЫЕ ========== */
     :root {
       --cloud-dancer:   #F8F9FA;
       --dusty-rose:     #DCA1A1;
@@ -135,7 +135,6 @@
       .hero { padding: 80px 40px 100px; }
     }
 
-    /* ботанические иллюстрации */
     .botanical {
       position: absolute;
       pointer-events: none;
@@ -321,7 +320,7 @@
       50%       { opacity: 0.15; transform: scaleY(0.6); }
     }
 
-    /* ========== ОСТАЛЬНЫЕ СЕКЦИИ (полностью оригинал, светлый фон карты) ========== */
+    /* ========== ОБЩИЕ СТИЛИ СЕКЦИЙ ========== */
     .section {
       padding: 50px 20px;
       position: relative;
@@ -334,6 +333,11 @@
       .section { padding: 80px 60px; }
     }
     .section--alt { background: linear-gradient(135deg, #f5f0ea 0%, var(--cloud-dancer) 100%); }
+
+    /* ЯВНЫЙ СВЕТЛЫЙ ФОН ДЛЯ СЕКЦИИ "МЕСТО ПРОВЕДЕНИЯ" */
+    .section#venue {
+      background: var(--cloud-dancer); /* #F8F9FA */
+    }
 
     .section-header {
       text-align: center;
@@ -479,7 +483,7 @@
       .program-desc { font-size: 12px; }
     }
 
-    /* ========== МЕСТО ПРОВЕДЕНИЯ (светлая карта, светлый фон как в первом варианте) ========== */
+    /* ========== МЕСТО ПРОВЕДЕНИЯ ========== */
     .venue-layout {
       display: flex;
       flex-direction: column;
@@ -501,7 +505,7 @@
       border: 1px solid rgba(69,73,78,0.12);
       box-shadow: var(--shadow-card);
       aspect-ratio: 4/3;
-      background: #eae4dc;  /* светлый фон */
+      background: #eae4dc;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -511,7 +515,7 @@
       width: 100%;
       height: auto;
       display: block;
-      background: #ede7de; /* светлый фон для SVG */
+      background: #ede7de;
     }
     .venue-name {
       font-family: 'Cormorant Garamond', serif;
@@ -616,7 +620,7 @@
       display: block;
     }
 
-    /* ========== RSVP (убрана строка "до 1 мая") ========== */
+    /* ========== RSVP ========== */
     .rsvp-section {
       background: linear-gradient(135deg, var(--cloud-dancer) 0%, #efe9e2 100%);
     }
@@ -873,7 +877,7 @@
         </div>
       </section>
 
-      <!-- МЕСТО ПРОВЕДЕНИЯ (светлая карта) -->
+      <!-- МЕСТО ПРОВЕДЕНИЯ (фон секции светлый) -->
       <section class="section" id="venue">
         <div class="section-header">
           <p class="section-eyebrow">Где нас найти</p>
@@ -929,7 +933,7 @@
         </div>
       </section>
 
-      <!-- RSVP (фраза "до 1 мая 2026" удалена) -->
+      <!-- RSVP -->
       <section class="section rsvp-section" id="rsvp">
         <div class="section-header"><p class="section-eyebrow">Мы будем рады видеть вас</p><h2 class="section-title">Подтвердить присутствие</h2><div class="section-divider"><div class="section-divider-line"></div><div class="section-divider-diamond"></div><div class="section-divider-line"></div></div></div>
         <div class="rsvp-card card">
