@@ -106,9 +106,7 @@
       box-shadow: 0 24px 80px rgba(0,0,0,0.55);
     }
 
-    /* ========== HERO SECTION ========== */
-    .site-wrap { background: var(--cloud-dancer); }
-
+    /* ========== HERO SECTION С ФОНОМ ========== */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -118,13 +116,18 @@
       justify-content: center;
       text-align: center;
       padding: 60px 20px 80px;
-      background: linear-gradient(170deg, var(--cloud-dancer) 0%, #f0ebe4 45%, #e8ddd3 100%);
+      /* ФОНОВОЕ ИЗОБРАЖЕНИЕ */
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       overflow: hidden;
     }
     @media (min-width: 768px) {
       .hero { padding: 80px 40px 100px; }
     }
 
+    /* Ботанические иллюстрации (оставляем, но они будут поверх фото, можно скрыть при желании, но оставим как есть) */
     .botanical {
       position: absolute;
       pointer-events: none;
@@ -156,7 +159,8 @@
       font-weight: 500;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--soft-clay);
+      color: #fff; /* стал белым, чтобы читалось на тёмном фоне */
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
       margin-bottom: 14px;
     }
     @media (min-width: 768px) {
@@ -168,19 +172,24 @@
       font-size: clamp(40px, 12vw, 110px);
       font-weight: 300;
       letter-spacing: 3px;
-      color: var(--graphite);
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
       line-height: 1;
       margin-bottom: 8px;
     }
     @media (min-width: 768px) {
       .hero-names { letter-spacing: 6px; margin-bottom: 12px; }
     }
+    .hero-names .amp {
+      color: var(--dusty-rose);
+      font-style: italic;
+    }
 
     .hero-names-underline {
       width: 80%;
       max-width: 320px;
       height: 1px;
-      background: linear-gradient(90deg, transparent 0%, var(--graphite) 30%, var(--graphite) 70%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.8) 70%, transparent 100%);
       margin: 12px auto 20px;
     }
     @media (min-width: 768px) {
@@ -192,7 +201,8 @@
       font-size: clamp(14px, 4vw, 26px);
       font-weight: 400;
       letter-spacing: 4px;
-      color: var(--caramel-mousse);
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
       text-transform: uppercase;
       margin-bottom: 6px;
     }
@@ -204,7 +214,8 @@
       font-size: 10px;
       font-weight: 400;
       letter-spacing: 2px;
-      color: var(--soft-clay);
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
       text-transform: uppercase;
       margin-bottom: 32px;
     }
@@ -212,7 +223,7 @@
       .hero-place { font-size: 12px; letter-spacing: 3px; margin-bottom: 48px; }
     }
 
-    /* Таймер */
+    /* Таймер на тёмном фоне */
     .countdown {
       display: flex;
       gap: 12px;
@@ -236,7 +247,8 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 32px;
       font-weight: 300;
-      color: var(--burnt-caramel);
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
       line-height: 1;
       min-width: 44px;
       text-align: center;
@@ -251,7 +263,8 @@
       font-size: 8px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: var(--soft-clay);
+      color: #fff;
+      opacity: 0.9;
     }
     @media (min-width: 480px) {
       .countdown-label { font-size: 9px; letter-spacing: 2.5px; }
@@ -260,7 +273,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 28px;
       font-weight: 300;
-      color: var(--dusty-rose);
+      color: #fff;
       align-self: flex-start;
       padding-top: 4px;
       display: none;
@@ -274,8 +287,8 @@
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      color: var(--graphite);
-      opacity: 0.45;
+      color: #fff;
+      opacity: 0.8;
       font-size: 9px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -285,14 +298,18 @@
     }
     .hero-scroll-line {
       width: 1px; height: 30px;
-      background: var(--graphite);
+      background: #fff;
       animation: scrollPulse 2s ease-in-out infinite;
     }
     @media (min-width: 768px) {
       .hero-scroll-line { height: 40px; }
     }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.6; transform: scaleY(1); }
+      50%       { opacity: 0.2; transform: scaleY(0.6); }
+    }
 
-    /* ========== ОБЩИЕ СТИЛИ СЕКЦИЙ ========== */
+    /* ========== ОСТАЛЬНЫЕ СТИЛИ (без изменений, только адаптив) ========== */
     .section {
       padding: 50px 20px;
       position: relative;
@@ -361,7 +378,6 @@
       .section-divider-diamond { width: 6px; height: 6px; }
     }
 
-    /* Карточки */
     .card {
       background: var(--card-bg);
       border: 1px solid rgba(69, 73, 78, 0.13);
@@ -374,7 +390,6 @@
       .card { padding: 36px 32px; }
     }
 
-    /* ========== ПРОГРАММА ========== */
     .program-timeline {
       display: flex;
       flex-direction: column;
@@ -452,7 +467,6 @@
       .program-desc { font-size: 12px; }
     }
 
-    /* ========== МЕСТО ПРОВЕДЕНИЯ ========== */
     .venue-layout {
       display: flex;
       flex-direction: column;
@@ -536,7 +550,6 @@
       margin-bottom: 2px;
     }
 
-    /* ========== ГАЛЕРЕЯ ========== */
     .gallery-section {
       background: linear-gradient(150deg, #f3ede6 0%, #ede5db 50%, #e6ddd3 100%);
     }
@@ -588,7 +601,6 @@
       display: block;
     }
 
-    /* ========== ПОДТВЕРДИТЬ ПРИСУТСТВИЕ ========== */
     .rsvp-section {
       background: linear-gradient(135deg, var(--cloud-dancer) 0%, #efe9e2 100%);
     }
@@ -631,7 +643,6 @@
       .rsvp-card iframe { height: 1037px; }
     }
 
-    /* ========== ФУТЕР ========== */
     .footer {
       background: var(--graphite);
       color: rgba(248,249,250,0.55);
@@ -679,7 +690,6 @@
       .footer-copy { font-size: 10px; letter-spacing: 1.5px; }
     }
 
-    /* ========== НАВИГАЦИЯ ========== */
     .nav {
       position: sticky;
       top: 0; z-index: 100;
@@ -734,16 +744,6 @@
       opacity: 1;
       color: var(--burnt-caramel);
     }
-
-    /* ========== ДОПОЛНИТЕЛЬНЫЕ ПРАВКИ ========== */
-    .hero-scroll,
-    .hero-ornament::before,
-    .hero-ornament::after {
-      display: block;
-    }
-    button, a {
-      -webkit-tap-highlight-color: transparent;
-    }
   </style>
 </head>
 <body>
@@ -766,7 +766,6 @@
   <div class="browser-screen">
     <div class="site-wrap">
 
-      <!-- НАВИГАЦИЯ -->
       <nav class="nav">
         <div class="nav-logo">Л <span class="amp">&</span> А</div>
         <ul class="nav-links">
@@ -777,9 +776,9 @@
         </ul>
       </nav>
 
-      <!-- HERO -->
+      <!-- HERO С ФОНОМ -->
       <section class="hero">
-        <!-- Ботанические иллюстрации -->
+        <!-- Ботанические иллюстрации (оставлены как есть) -->
         <svg class="botanical botanical--tl" viewBox="0 0 340 420" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>
         <svg class="botanical botanical--tr" viewBox="0 0 340 420" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>
         <svg class="botanical botanical--bl" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">...</svg>
@@ -795,7 +794,6 @@
           <p class="hero-date">18 июня 2026</p>
           <p class="hero-place">Казань</p>
 
-          <!-- Таймер -->
           <div class="countdown" id="countdown">
             <div class="countdown-unit">
               <span class="countdown-number" id="days">—</span>
@@ -838,7 +836,6 @@
         </div>
 
         <div class="program-timeline">
-          <!-- Левая колонка -->
           <div style="display: flex; flex-direction: column; gap: 30px; padding-bottom: 0;">
             <div class="program-item card">
               <div class="program-icon">
@@ -870,10 +867,8 @@
             </div>
           </div>
 
-          <!-- Вертикальная линия -->
           <div class="program-timeline-line"></div>
 
-          <!-- Правая колонка -->
           <div style="display: flex; flex-direction: column; gap: 30px; padding-top: 0;">
             <div class="program-item card">
               <div class="program-icon">
@@ -1073,7 +1068,6 @@
         </div>
       </section>
 
-      <!-- ФУТЕР -->
       <footer class="footer">
         <div style="display:flex; justify-content:center; margin-bottom:20px; opacity:0.35;">
           <svg width="240" height="40" viewBox="0 0 280 50" fill="none">
@@ -1112,7 +1106,7 @@
       const diff = target - now;
       if (diff <= 0) {
         const container = document.getElementById('countdown');
-        if (container) container.innerHTML = '<span style="font-family:Cormorant Garamond,serif;font-size:clamp(24px,6vw,32px);color:var(--burnt-caramel);letter-spacing:3px;">Сегодня!</span>';
+        if (container) container.innerHTML = '<span style="font-family:Cormorant Garamond,serif;font-size:clamp(24px,6vw,32px);color:#fff;letter-spacing:3px;">Сегодня!</span>';
         return;
       }
       const days    = Math.floor(diff / 86400000);
@@ -1135,4 +1129,3 @@
 
 </body>
 </html>
-```
